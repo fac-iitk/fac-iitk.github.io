@@ -21,6 +21,7 @@ function myFacebookLogin() {
                 c.height = image.data.height;
                 var img = document.getElementById('artprofile');
                     img.src = image.data.url;
+                document.getElementById("artbg").src = image.data.url;
                     var tab3 = document.getElementById("tab3_content");
                         tab3.appendChild(c);
                 // var img2 = document.getElementById('png2');
