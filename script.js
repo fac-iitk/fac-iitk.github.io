@@ -46,8 +46,6 @@ function myFacebookLogin() {
                 alert("Please Login in our application");
             }
         });
-    }, {
-        scope: 'publish_actions'
     });
 }
 
