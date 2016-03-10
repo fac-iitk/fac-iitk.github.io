@@ -63,7 +63,13 @@ function generatePreview() {
     var img2 = document.getElementById('png2');
     var ctx = c.getContext("2d");
     ctx.drawImage(img, 0, 0);
-    ctx.drawImage(img2, 0,0);
+    if(c.width < 710){
+        var offset = c.width - 720;
+            ctx.drawImage(img2, offset,offset);
+    }else{
+          ctx.drawImage(img2, 0,0);  
+    }
+
 }
 
 function downloadCanvas(link, canvasId, filename) {
