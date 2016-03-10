@@ -10,11 +10,37 @@ function myFacebookLogin() {
     FB.login(function() {
         FB.api('/me', function(response) {
             if (response) {
-                console.log(response);
-                document.getElementById("artprofile").src = "https://graph.facebook.com/" + response.id + "/picture?type=large";
-                document.getElementById("artbg").src = "https://graph.facebook.com/" + response.id + "/picture?type=large";
+                FB.api(
+                    "/" + response.id + "/picture",
+                    function(image) {
+                        if (image && !image.error) {
+                            console.log(image);
+                var c = document.createElement('canvas');
+                c.id = "canvas";
+                c.width = image.data.width;
+                c.height = image.data.height;
+                var img = document.getElementById('artprofile');
+                    img.src = image.data.url;
+                    var tab3 = document.getElementById("tab3_content");
+                        tab3.appendChild(c);
+                // var img2 = document.getElementById('png2');
+                // var ctx = c.getContext("2d");
+                // ctx.drawImage(img, 0, 0);
+                // var tab3 = document.getElementById("tab3_content");
+                // tab3.appendChild(c);
+                // ctx.drawImage(img2, 0,0);
+                //document.getElementById("artprofile").src = "https://graph.facebook.com/" + response.id + "/picture?type=large";
+                // document.getElementById("artbg").src = "https://graph.facebook.com/" + response.id + "/picture?type=large";
                 document.getElementById("artname").innerHTML = response.name
-            }
+ 
+                        }
+                    }, {
+                        "type": "square",
+                        "height": 720,
+                        "width": 720
+                    }
+                );
+                           }
             else {
                 alert("Please Login in our application");
             }
@@ -33,17 +59,12 @@ function changeoverlay() {
 // }
 
 function generatePreview() {
-    var c = document.createElement('canvas');
-    c.id = "canvas";
-    c.width = 200;
-    c.height = 200;
+    var c = document.getElementById('canvas');
     var img = document.getElementById('artprofile');
     var img2 = document.getElementById('png2');
     var ctx = c.getContext("2d");
     ctx.drawImage(img, 0, 0);
-    var tab3 = document.getElementById("tab3_content");
-    tab3.appendChild(c);
-    ctx.drawImage(img2, 105, 100, 100, 100);
+    ctx.drawImage(img2, 0,0);
 }
 
 function downloadCanvas(link, canvasId, filename) {
